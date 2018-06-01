@@ -2,7 +2,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_1
+      - sles12cis_rule_6_1_1
   tags:
       - level2
       - patch
@@ -16,7 +16,7 @@
       group: root
       mode: 0644
   when:
-      - rhel7cis_rule_6_1_2
+      - sles12cis_rule_6_1_2
   tags:
       - level1
       - level2
@@ -30,7 +30,7 @@
       group: root
       mode: 0000
   when:
-      - rhel7cis_rule_6_1_3
+      - sles12cis_rule_6_1_3
   tags:
       - level1
       - level2
@@ -44,27 +44,12 @@
       group: root
       mode: 0644
   when:
-      - rhel7cis_rule_6_1_4
+      - sles12cis_rule_6_1_4
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.4
-
-- name: "SCORED | 6.1.5 | PATCH | Ensure permissions on /etc/gshadow are configured"
-  file:
-      dest: /etc/gshadow
-      owner: root
-      group: root
-      mode: 0000
-  when:
-      - rhel7cis_rule_6_1_5
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.5
 
 - name: "SCORED | 6.1.5 | PATCH | Ensure permissions on /etc/passwd- are configured (Scored)"
   file:
@@ -73,28 +58,12 @@
       group: root
       mode: 0600
   when:
-      - rhel7cis_rule_6_1_5
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_5
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.5
-
-- name: "SCORED | 6.1.6 | PATCH | Ensure permissions on /etc/passwd- are configured"
-  file:
-      dest: /etc/passwd-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - rhel7cis_rule_6_1_6
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.6
 
 - name: "SCORED | 6.1.6 | PATCH | Ensure permissions on /etc/shadow- are configured (Scored)"
   file:
@@ -103,28 +72,12 @@
       group: root
       mode: 0600
   when:
-      - rhel7cis_rule_6_1_6
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_6
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.6
-
-- name: "SCORED | 6.1.7 | PATCH | Ensure permissions on /etc/shadow- are configured"
-  file:
-      dest: /etc/shadow-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - rhel7cis_rule_6_1_7
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.7
 
 - name: "SCORED | 6.1.7 | PATCH | Ensure permissions on /etc/group- are configured (Scored)"
   file:
@@ -133,89 +86,42 @@
       group: root
       mode: 0600
   when:
-      - rhel7cis_rule_6_1_7
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_7
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.7
 
-- name: "SCORED | 6.1.8 | PATCH | Ensure permissions on /etc/group- are configured"
-  file:
-      dest: /etc/group-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - rhel7cis_rule_6_1_8
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.8
-
 - name: "SCORED | 6.1.8 | PATCH | Ensure no world writable files exist"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_8
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_8
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.8
       - notimplemented
-
-- name: "SCORED | 6.1.9 | PATCH | Ensure permissions on /etc/gshadow- are configured"
-  file:
-      dest: /etc/gshadow-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - rhel7cis_rule_6_1_9
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.9
 
 - name: "SCORED | 6.1.9 | PATCH | Ensure no unowned files or directories exist (Scored)"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_9
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_9
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.9
-      - notimplemented
-
-- name: "SCORED | 6.1.10 | PATCH | Ensure no world writable files exist"
-  command: /bin/true
-  changed_when: no
-  when:
-      - rhel7cis_rule_6_1_10
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.10
       - notimplemented
 
 - name: "SCORED | 6.1.10 | PATCH | Ensure no ungrouped files or directories exist (Scored)"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_10
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_10
   tags:
       - level1
       - level2
@@ -223,51 +129,23 @@
       - rule_6.1.10
       - notimplemented
 
-- name: "SCORED | 6.1.11 | PATCH | Ensure no unowned files or directories exist"
-  command: /bin/true
-  changed_when: no
-  when:
-      - rhel7cis_rule_6_1_11
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.11
-      - notimplemented
-
 - name: "SCORED | 6.1.11 | PATCH | Audit SUID executables (Not Scored)"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_11
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_11
   tags:
       - level1
       - level2
       - patch
       - rule_6.1.11
-      - notimplemented
-
-- name: "SCORED | 6.1.12 | PATCH | Ensure no ungrouped files or directories exist"
-  command: /bin/true
-  changed_when: no
-  when:
-      - rhel7cis_rule_6_1_12
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.12
       - notimplemented
 
 - name: "SCORED | 6.1.12 | PATCH | Audit SGID executables (Not Scored)"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_12
-      - ansible_os_family == 'Suse'
+      - sles12cis_rule_6_1_12
   tags:
       - level1
       - level2
@@ -275,25 +153,11 @@
       - rule_6.1.12
       - notimplemented
 
-- name: "NOTSCORED | 6.1.13 | PATCH | Audit SUID executables"
-  command: /bin/true
-  changed_when: no
-  when:
-      - rhel7cis_rule_6_1_13
-      - ansible_os_family == 'RedHat'
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.13
-      - notimplemented
-
 - name: "NOTSCORED | 6.1.14 | PATCH | Audit SGID executables"
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_1_14
-      - ansible_os_family == 'RedHat'
+      - sles12cis_rule_6_1_14
   tags:
       - level1
       - level2
@@ -308,7 +172,7 @@
   with_items: "{{ empty_password_accounts.stdout_lines }}"
   when:
       - empty_password_accounts.rc
-      - rhel7cis_rule_6_2_1
+      - sles12cis_rule_6_2_1
   tags:
       - level1
       - level2
@@ -320,7 +184,7 @@
   changed_when: no
   failed_when: no
   when:
-      - rhel7cis_rule_6_2_2
+      - sles12cis_rule_6_2_2
   tags:
       - level1
       - level2
@@ -332,7 +196,7 @@
   changed_when: no
   failed_when: no
   when:
-      - rhel7cis_rule_6_2_3
+      - sles12cis_rule_6_2_3
   tags:
       - level1
       - level2
@@ -344,7 +208,7 @@
   changed_when: no
   failed_when: no
   when:
-      - rhel7cis_rule_6_2_4
+      - sles12cis_rule_6_2_4
   tags:
       - level1
       - level2
@@ -358,7 +222,7 @@
   with_items: "{{ uid_zero_accounts_except_root.stdout_lines }}"
   when:
       - uid_zero_accounts_except_root.rc
-      - rhel7cis_rule_6_2_5
+      - sles12cis_rule_6_2_5
   tags:
       - level1
       - level2
@@ -369,7 +233,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_6
+      - sles12cis_rule_6_2_6
   tags:
       - level1
       - level2
@@ -381,7 +245,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_7
+      - sles12cis_rule_6_2_7
   tags:
       - level1
       - level2
@@ -393,7 +257,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_8
+      - sles12cis_rule_6_2_8
   tags:
       - level1
       - level2
@@ -405,7 +269,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_9
+      - sles12cis_rule_6_2_9
   tags:
       - level1
       - level2
@@ -417,7 +281,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_10
+      - sles12cis_rule_6_2_10
   tags:
       - level1
       - level2
@@ -431,7 +295,7 @@
       dest: "~{{ item }}/.forward"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - rhel7cis_rule_6_2_11
+      - sles12cis_rule_6_2_11
   tags:
       - level1
       - level2
@@ -444,7 +308,7 @@
       dest: "~{{ item }}/.netrc"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - rhel7cis_rule_6_2_12
+      - sles12cis_rule_6_2_12
   tags:
       - level1
       - level2
@@ -468,7 +332,7 @@
       dest: "~{{ item }}/.rhosts"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - rhel7cis_rule_6_2_14
+      - sles12cis_rule_6_2_14
   tags:
       - level1
       - level2
@@ -479,7 +343,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_15
+      - sles12cis_rule_6_2_15
   tags:
       - level1
       - level2
@@ -491,7 +355,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_16
+      - sles12cis_rule_6_2_16
   tags:
       - level1
       - level2
@@ -503,7 +367,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_17
+      - sles12cis_rule_6_2_17
   tags:
       - level1
       - level2
@@ -515,7 +379,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_18
+      - sles12cis_rule_6_2_18
   tags:
       - level1
       - level2
@@ -527,7 +391,7 @@
   command: /bin/true
   changed_when: no
   when:
-      - rhel7cis_rule_6_2_19
+      - sles12cis_rule_6_2_19
   tags:
       - level1
       - level2

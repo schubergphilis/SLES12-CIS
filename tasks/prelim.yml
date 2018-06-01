@@ -11,6 +11,7 @@
   shell: "cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
   register: empty_password_accounts
   changed_when: no
+  failed_when: empty_password_accounts.rc > 1
   check_mode: no
 
 - name: "PRELIM | Gather UID 0 accounts other than root"
@@ -224,17 +225,3 @@
   changed_when: no
   check_mode: no
   warn: false
-
-- name: "PRELIM | Check for rhnsd service"
-  shell: "{{ 'service rhnsd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rhnsd | grep LoadState | cut -d = -f 2' }}"
-  register: rhnsd_service_status
-  changed_when: no
-  check_mode: no
-  failed_when: rhnsd_service_status.rc not in rhel7cis_service_status_ok_exit_codes
-  warn: false
-
-- debug:
-      msg: "Firewall found:{{ rhel7cis_firewall }}; Time sync service found:{{ rhel7cis_time_synchronization }}; Systemd section found : {{ rhel7cis_systemd }}"
-
-- debug:
-      msg: "NTP status: {{ ntpd_service_status.stdout }}"

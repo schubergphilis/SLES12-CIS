@@ -1,7 +1,7 @@
 ---
 ansible_user: root
 # AIDE cron settings
-rhel7cis_aide_cron:
+sles12cis_aide_cron:
   cron_user: root
   cron_file: /var/spool/cron/root
   aide_job: '/usr/sbin/aide --check'
@@ -11,7 +11,7 @@ rhel7cis_aide_cron:
   aide_month: '*'
   aide_weekday: '*'
 
-rhel7cis_sshd:
+sles12cis_sshd:
     clientalivecountmax: 3
     clientaliveinterval: 300
     ciphers: "aes256-ctr,aes192-ctr,aes128-ctr"
@@ -24,5 +24,5 @@ rhel7cis_sshd:
     denygroups: root
 
 # Workarounds for Docker
-rhel7cis_skip_for_travis: true
-rhel7cis_selinux_disable: true
+sles12cis_skip_for_travis: true
+sles12cis_selinux_disable: true
