@@ -1,6 +1,6 @@
 galaxy_info:
   author: "Daniel Shepherd, Matt Shepherd, Bas Meijeri, amunter, daswars, Anton Opgenoort"
-  description: "Ansible role to apply SLES 7 CIS Baseline"
+  description: "Ansible role to apply SLES 12 CIS Baseline"
   company:
   license: MIT
   min_ansible_version: 2.2

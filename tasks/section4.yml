@@ -414,18 +414,6 @@
       - rule_4.2.1.5
       - notimplemented
 
-- name: "NOTSCORED | 4.2.1.5 | PATCH | Ensure remote rsyslog messages are only accepted on designated log hosts."
-  command: /bin/true
-  changed_when: no
-  when:
-      - sles12cis_rule_4_2_1_5
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_4.2.1.5
-      - notimplemented
-
 - name: "SCORED | 4.2.2.1 | PATCH | Ensure syslog-ng service is enabled"
   command: /bin/true
   changed_when: no

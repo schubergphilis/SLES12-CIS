@@ -382,39 +382,14 @@
       name: firewalld
       state: started
       enabled: yes
-  when: 
+  when:
       - sles12cis_firewall == "firewalld"
       - sles12cis_rule_3_6_1
   tags:
       - level1
       - patch
-      - rule_3.6
-
-- name: "SCORED | 3.6.1 | PATCH | Ensure iptables is installed"
-  package:
-      name: iptables
-      state: present
-  when:
-      - sles12cis_firewall == "iptables"
-      - sles12cis_rule_3_6_1
-  tags:
-      - level1
-      - patch
       - rule_3.6.1
 
-- name: "SCORED | 3.6.1 | PATCH | Ensure iptables is installed and started"
-  service:
-      name: iptables
-      state: started
-      enabled: yes
-  when:
-      - sles12cis_firewall == "iptables"
-      - sles12cis_rule_3_6_1
-  tags:
-      - level1
-      - patch
-      - rule_3.6.1
-      
 - name: "SCORED | 3.6.1 | PATCH | Ensure iptables is installed and started"
   command: /bin/true
   changed_when: no

@@ -49,7 +49,7 @@
   check_mode: no
   failed_when: no
   args:
-    warn: no
+    warn: false
   when:
     - sles12cis__skip_for_travis == false
   tags:

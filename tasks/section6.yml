@@ -153,18 +153,6 @@
       - rule_6.1.12
       - notimplemented
 
-- name: "NOTSCORED | 6.1.14 | PATCH | Audit SGID executables"
-  command: /bin/true
-  changed_when: no
-  when:
-      - sles12cis_rule_6_1_14
-  tags:
-      - level1
-      - level2
-      - patch
-      - rule_6.1.14
-      - notimplemented
-
 - name: "SCORED | 6.2.1 | PATCH | Ensure password fields are not empty"
   command: passwd -l {{ item }}
   changed_when: no
@@ -183,6 +171,7 @@
   command: sed -i '/^+/ d' /etc/passwd
   changed_when: no
   failed_when: no
+  warn: false
   when:
       - sles12cis_rule_6_2_2
   tags:
@@ -195,6 +184,7 @@
   command: sed -i '/^+/ d' /etc/shadow
   changed_when: no
   failed_when: no
+  warn: false
   when:
       - sles12cis_rule_6_2_3
   tags:

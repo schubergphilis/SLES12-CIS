@@ -67,6 +67,7 @@ sles12cis_rule_1_6_1_2: true
 sles12cis_rule_1_6_1_3: true
 sles12cis_rule_1_6_1_4: true
 sles12cis_rule_1_6_1_5: true
+sles12cis_rule_1_6_1_6: true
 sles12cis_rule_1_6_2: true
 sles12cis_rule_1_6_2_1: true
 sles12cis_rule_1_6_2_2: true
@@ -88,6 +89,10 @@ sles12cis_rule_2_1_4: true
 sles12cis_rule_2_1_5: true
 sles12cis_rule_2_1_6: true
 sles12cis_rule_2_1_7: true
+sles12cis_rule_2_1_8: true
+sles12cis_rule_2_1_9: true
+sles12cis_rule_2_1_10: true
+sles12cis_rule_2_1_11: true
 sles12cis_rule_2_2_1_1: true
 sles12cis_rule_2_2_1_2: true
 sles12cis_rule_2_2_1_3: true

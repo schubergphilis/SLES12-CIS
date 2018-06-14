@@ -167,14 +167,80 @@
       - patch
       - rule_2.1.5
 
-- name: "SCORED | 2.1.6 | PATCH | Ensure tftp server is not enabled"
+- name: "SCORED | 2.1.6 | PATCH | Ensure rsh server is not enabled | rsh"
+  service:
+      name: rsh.socket
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_rsh_server == false and rsh_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_6
+  tags:
+      - level1
+      - patch
+      - rule_2.1.6
+
+- name: "SCORED | 2.1.6 | PATCH | Ensure rsh server is not enabled | rlogin"
+  service:
+      name: rlogin.socket
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_rsh_server == false and rlogin_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_6
+  tags:
+      - level1
+      - patch
+      - rule_2.1.6
+
+- name: "SCORED | 2.1.6 | PATCH | Ensure rsh server is not enabled | rexec"
+  service:
+      name: rexec.socket
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_rsh_server == false and rexec_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_6
+  tags:
+      - level1
+      - patch
+      - rule_2.1.6
+
+- name: "SCORED | 2.1.7 | PATCH | Ensure talk server is not enabled"
+  service:
+      name: ntalk
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_ntalk_server == false and ntalk_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_7
+  tags:
+      - level1
+      - patch
+      - rule_2.1.7
+
+
+- name: "SCORED | 2.1.8 | PATCH | Ensure telnet server is not enabled"
+  service:
+      name: telnet
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_telnet_server == false and telnet_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_8
+  tags:
+      - level1
+      - patch
+      - rule_2.1.8
+
+- name: "SCORED | 2.1.9 | PATCH | Ensure tftp server is not enabled"
   block:
-      - name: "SCORED | 2.1.6 | PATCH | Ensure tftp server is not enabled"
+      - name: "SCORED | 2.1.9 | PATCH | Ensure tftp server is not enabled"
         stat:
             path: /etc/xinetd.d/tftp
         register: tftp_service
 
-      - name: "SCORED | 2.1.6 | PATCH | Ensure tftp server is not enabled"
+      - name: "SCORED | 2.1.9 | PATCH | Ensure tftp server is not enabled"
         command: chkconfig tftp off
         notify: restart xinetd
         when: tftp_service.stat.exists and sles12cis_tftp_server == false
@@ -182,26 +248,39 @@
             - skip_ansible_lint
 
   when:
-      - sles12cis_rule_2_1_6
+      - sles12cis_rule_2_1_9
   tags:
       - level1
       - scored
       - patch
-      - rule_2.1.6
+      - rule_2.1.9
 
-- name: "SCORED | 2.1.7 | PATCH | Ensure xinetd is not enabled"
+- name: "SCORED | 2.1.10 | PATCH | Ensure rsync service is not enabled "
+  service:
+      name: rsyncd
+      state: stopped
+      enabled: no
+  when:
+      - sles12cis_rsyncd_server == false and rsyncd_service_status.stdout in sles12cis_service_status
+      - sles12cis_rule_2_1_10
+  tags:
+      - level1
+      - patch
+      - rule_2.1.10
+
+- name: "SCORED | 2.1.11 | PATCH | Ensure xinetd is not enabled"
   service:
       name: xinetd
       state: stopped
       enabled: no
   when:
       - xinetd_service_status.stdout in sles12cis_service_status and not sles12cis_xinetd_required
-      - sles12cis_rule_2_1_7
+      - sles12cis_rule_2_1_11
   tags:
       - level1
       - patch
       - scored
-      - rule_2.1.7
+      - rule_2.1.11
 
 - name: "NOTSCORED | 2.2.1.1 | PATCH | Ensure time synchronization is in use - service install {{ sles12cis_time_synchronization }}"
   package:
@@ -543,58 +622,6 @@
       - patch
       - rule_2.2.16
 
-- name: "SCORED | 2.2.17 | PATCH | Ensure rsh server is not enabled | rsh"
-  service:
-      name: rsh.socket
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_rsh_server == false and rsh_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_17
-  tags:
-      - level1
-      - patch
-      - rule_2.2.17
-
-- name: "SCORED | 2.2.17 | PATCH | Ensure rsh server is not enabled | rlogin"
-  service:
-      name: rlogin.socket
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_rsh_server == false and rlogin_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_17
-  tags:
-      - level1
-      - patch
-      - rule_2.2.17
-
-- name: "SCORED | 2.2.17 | PATCH | Ensure rsh server is not enabled | rexec"
-  service:
-      name: rexec.socket
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_rsh_server == false and rexec_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_17
-  tags:
-      - level1
-      - patch
-      - rule_2.2.17
-
-- name: "SCORED | 2.2.18 | PATCH | Ensure telnet server is not enabled"
-  service:
-      name: telnet
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_telnet_server == false and telnet_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_18
-  tags:
-      - level1
-      - patch
-      - rule_2.2.18
-
 - name: "SCORED | 2.2.19 | PATCH | Ensure tftp server is not enabled"
   service:
       name: tftp
@@ -610,32 +637,6 @@
       - tftp
       - patch
       - rule_2.2.19
-
-- name: "SCORED | 2.2.20 | PATCH | Ensure rsync service is not enabled "
-  service:
-      name: rsyncd
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_rsyncd_server == false and rsyncd_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_20
-  tags:
-      - level1
-      - patch
-      - rule_2.2.20
-
-- name: "SCORED | 2.2.21 | PATCH | Ensure talk server is not enabled"
-  service:
-      name: ntalk
-      state: stopped
-      enabled: no
-  when:
-      - sles12cis_ntalk_server == false and ntalk_service_status.stdout in sles12cis_service_status
-      - sles12cis_rule_2_2_21
-  tags:
-      - level1
-      - patch
-      - rule_2.2.21
 
 - name: "SCORED | 2.3.1 | PATCH | Ensure NIS Client is not installed"
   package:

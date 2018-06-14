@@ -60,7 +60,7 @@
 
   - name: Run CIS_CAT
     when: sles12cis_cat.stat.exists
-    shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ rhelcis_audit_level }}_-_Server'
+    shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ sles12cis_audit_level }}_-_Server'
     args:
       chdir: "{{ install_dir }}/cis-cat-full"
 
