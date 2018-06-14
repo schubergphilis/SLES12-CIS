@@ -3,7 +3,7 @@
   gather_facts: False
 
   vars:
-    rhelcis_audit_level: 2
+    sles12cis_audit_level: 2
     ciscat: ciscat-full-bundle-2017-11-06-v3.0.44.zip
     member_dir: '/usr/local/share/CIS'
     install_dir: '/root'
@@ -27,10 +27,10 @@
     changed_when: no
     failed_when: no
     check_mode: no
-    register: rhelcis7_ciscat
+    register: sles12cis_cat
 
   - name: Ensure /root/CIS-CAT_Results/ exists
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     file:
       path: /root/CIS-CAT_Results/
       state: directory
@@ -42,7 +42,7 @@
       state: absent
 
   - name: Add Java to run security audit
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     package:
       name: "{{ item }}"
       state: present
@@ -51,7 +51,7 @@
 
 
   - name: chmod script
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     file:
       path: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
       mode: 0700
@@ -59,32 +59,32 @@
       group: root
 
   - name: Run CIS_CAT
-    when: rhelcis7_ciscat.stat.exists
-    shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ rhelcis_audit_level }}_-_Server'
+    when: sles12cis_cat.stat.exists
+    shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ sles12cis_audit_level }}_-_Server'
     args:
       chdir: "{{ install_dir }}/cis-cat-full"
 
   - name: Move the html report
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     shell: "mv -f /root/CIS-CAT_Results/*/report.html /tmp/{{ inventory_hostname }}.html"
 
   - name: Move the text report
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     shell: "mv -f /root/CIS-CAT_Results/*/report.txt /tmp/{{ inventory_hostname }}.txt"
 
   - name: Clear the text reports
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     shell: "rm -rf /root/CIS-CAT_Results/*"
 
   - name: Fetch the text report
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     fetch:
       flat: True
       src: "/tmp/{{ inventory_hostname }}.txt"
       dest: "./{{ inventory_hostname }}.txt"
 
   - name: Fetch the html report
-    when: rhelcis7_ciscat.stat.exists
+    when: sles12cis_cat.stat.exists
     fetch:
       flat: True
       src: "/tmp/{{ inventory_hostname }}.html"

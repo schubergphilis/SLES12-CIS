@@ -10,9 +10,9 @@ driver:
   name: docker
 docker:
   containers:
-    - name: docker
-      image: centos/systemd
-      image_version: latest
+    - name: opensuse42.3
+      image: opensuse/leap
+      image_version: 42.3
       privileged: True
       ansible_groups:
         - docker

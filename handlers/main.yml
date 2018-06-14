@@ -1,5 +1,5 @@
 ---
-# handlers file for RHEL7-CIS
+# handlers file for sles12cis_-CIS
 
 - name: sysctl flush ipv4 route table
   become: yes
@@ -16,24 +16,6 @@
       value: 1
       sysctl_set: yes
   when: ansible_virtualization_type != "docker"
-
-- name: systemd restart tmp.mount
-  become: yes
-  systemd:
-      name: tmp.mount
-      daemon_reload: yes
-      enabled: yes
-      masked: no
-      state: reloaded
-
-- name: systemd restart var-tmp.mount
-  become: yes
-  systemd:
-      name: var-tmp.mount
-      daemon_reload: yes
-      enabled: yes
-      masked: no
-      state: reloaded
 
 - name: generate new grub config
   become: yes
@@ -67,8 +49,8 @@
   check_mode: no
   failed_when: no
   args:
-    warn: no
+    warn: false
   when:
-    - rhel7cis_skip_for_travis == false
+    - sles12cis__skip_for_travis == false
   tags:
     - skip_ansible_lint

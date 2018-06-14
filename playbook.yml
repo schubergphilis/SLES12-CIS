@@ -1,15 +1,15 @@
 ---
 - hosts: all
   pre_tasks:
+    # - name: install zypper pre-requisite for Ansible module package to use zypper
+    #   command: zypper install -y python-xml
+    #   warn: nowarn
     - name: install packages for testing under docker
       package:
         name: "{{ item }}"
         state: present
       with_items:
-        - selinux-policy
-        - libselinux-python
-        - openssh-server
+        # - python-xml
         - which
-
   roles:
-    - role: RHEL7-CIS
+    - role: SLES12-CIS

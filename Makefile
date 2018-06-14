@@ -1,4 +1,4 @@
-# Makefile for RHEL7-CIS
+# Makefile for SLES12-CIS
 .PHONY: help
 help:
 	@echo
@@ -42,7 +42,7 @@ bin/python:
 
 # cleanup virtualenv and molecule leftovers
 clean:
-	rm -rf .molecule bin lib include lib64 share
+	rm -rf .molecule bin lib include lib64 share .vagrant
 	rm -f .Python pip-selfcheck.json
 
 .PHONY: lint

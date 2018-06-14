@@ -1,10 +1,9 @@
-Linux CIS - Supports RHEL6/7, CentOS6/7, SLES12
+Linux CIS - Supports SLES12, openSUSE42.3
 ================
 Based on the exellent work done by the MindPointGroup [Ansible Role](https://img.shields.io/ansible/role/16089.svg)](https://galaxy.ansible.com/MindPointGroup/RHEL7-CIS/)
 
-Configure RHEL/Centos 7 machine to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant. Level 1 and 2 findings will be corrected by default.
+Configure SLES12/OpenSUSE42.3 machine to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant. Level 1 and 2 findings will be corrected by default.
 
-Since Schuberg Philis still wants to merge the work from the MindPointGroup into this fork, we have kept the tags & naming conventions as close as possible to the original version (i.e. all tags still start with rhel7cis\_ .). 
 
 ## Warning on use
 
@@ -19,17 +18,10 @@ If you want to install this via the `ansible-galaxy` command you'll need to run 
 With this in the file requirements.yml:
 
 ```
-- src: https://github.com/schubergphilis/RHEL7-CIS.git
+- src: https://github.com/schubergphilis/SLES12-CIS.git
 ```
 
-Based on [CIS RedHat Enterprise Linux 7 Benchmark v2.1.1 - 01-31-2017 ](https://community.cisecurity.org/collab/public/index.php).
-
-
-Support for the following ruleset (however ruleset descriptions might not match the numbering of CIS):
-[RHEL 6 CIS 2.1.0](https://community.cisecurity.org/collab/public/index.php).
-[CentOS 6 CIS 2.1.0](https://community.cisecurity.org/collab/public/index.php).
-[CentOS 7 CIS 2.1.0](https://community.cisecurity.org/collab/public/index.php).
-[Suse 12 CIS 2.0.0](https://community.cisecurity.org/collab/public/index.php).
+Based on [ CIS SUSE Linux Enterprise 12 Benchmark v2.0.0 - 12-07-2016 ](https://community.cisecurity.org/collab/public/index.php).
 
 This repo originated from work done by [Sam Doran](https://github.com/samdoran/ansible-role-stig)
 
@@ -37,79 +29,79 @@ Requirements
 ------------
 
 You should carefully read through the tasks to make sure these changes will not break your systems before running this playbook.
-If you want to do a dry run without changing anything, set the below sections (rhel7cis_section1-6) to false. 
+If you want to do a dry run without changing anything, set the below sections (sles12cis_section1-6) to false. 
 
 Role Variables
 --------------
 There are many role variables defined in defaults/main.yml. This list shows the most important.
 
-**rhel7cis_notauto**: Run CIS checks that we typically do NOT want to automate due to the high probability of breaking the system (Default: false)
+**sles12cis_notauto**: Run CIS checks that we typically do NOT want to automate due to the high probability of breaking the system (Default: false)
 
-**rhel7cis_section1**: CIS - General Settings (Section 1) (Default: true)
+**sles12cis_section1**: CIS - General Settings (Section 1) (Default: true)
 
-**rhel7cis_section2**: CIS - Services settings (Section 2) (Default: true)
+**sles12cis_section2**: CIS - Services settings (Section 2) (Default: true)
 
-**rhel7cis_section3**: CIS - Network settings (Section 3) (Default: true)
+**sles12cis_section3**: CIS - Network settings (Section 3) (Default: true)
 
-**rhel7cis_section4**: CIS - Logging and Auditing settings (Section 4) (Default: true)
+**sles12cis_section4**: CIS - Logging and Auditing settings (Section 4) (Default: true)
 
-**rhel7cis_section5**: CIS - Access, Authentication and Authorization settings (Section 5) (Default: true)
+**sles12cis_section5**: CIS - Access, Authentication and Authorization settings (Section 5) (Default: true)
 
-**rhel7cis_section6**: CIS - System Maintenance settings (Section 6) (Default: true)  
+**sles12cis_section6**: CIS - System Maintenance settings (Section 6) (Default: true)  
 
 ##### Disable all selinux functions
-`rhel7cis_selinux_disable: false`
+`sles12cis_selinux_disable: false`
 
 ##### Service variables:
 ###### These control whether a server should or should not be allowed to continue to run these services
 
 ```
-rhel7cis_avahi_server: false  
-rhel7cis_cups_server: false  
-rhel7cis_dhcp_server: false  
-rhel7cis_ldap_server: false  
-rhel7cis_telnet_server: false  
-rhel7cis_nfs_server: false  
-rhel7cis_rpc_server: false  
-rhel7cis_ntalk_server: false  
-rhel7cis_rsyncd_server: false  
-rhel7cis_tftp_server: false  
-rhel7cis_rsh_server: false  
-rhel7cis_nis_server: false  
-rhel7cis_snmp_server: false  
-rhel7cis_squid_server: false  
-rhel7cis_smb_server: false  
-rhel7cis_dovecot_server: false  
-rhel7cis_httpd_server: false  
-rhel7cis_vsftpd_server: false  
-rhel7cis_named_server: false  
-rhel7cis_bind: false  
-rhel7cis_vsftpd: false  
-rhel7cis_httpd: false  
-rhel7cis_dovecot: false  
-rhel7cis_samba: false  
-rhel7cis_squid: false  
-rhel7cis_net_snmp: false  
+sles12cis_avahi_server: false  
+sles12cis_cups_server: false  
+sles12cis_dhcp_server: false  
+sles12cis_ldap_server: false  
+sles12cis_telnet_server: false  
+sles12cis_nfs_server: false  
+sles12cis_rpc_server: false  
+sles12cis_ntalk_server: false  
+sles12cis_rsyncd_server: false  
+sles12cis_tftp_server: false  
+sles12cis_rsh_server: false  
+sles12cis_nis_server: false  
+sles12cis_snmp_server: false  
+sles12cis_squid_server: false  
+sles12cis_smb_server: false  
+sles12cis_dovecot_server: false  
+sles12cis_httpd_server: false  
+sles12cis_vsftpd_server: false  
+sles12cis_named_server: false  
+sles12cis_bind: false  
+sles12cis_vsftpd: false  
+sles12cis_httpd: false  
+sles12cis_dovecot: false  
+sles12cis_samba: false  
+sles12cis_squid: false  
+sles12cis_net_snmp: false  
 ```  
 
 ##### Designate server as a Mail server
-`rhel7cis_is_mail_server: false`
+`sles12cis_is_mail_server: false`
 
 
 ##### System network parameters (host only OR host and router)
-`rhel7cis_is_router: false`  
+`sles12cis_is_router: false`  
 
 
 ##### IPv6 required
-`rhel7cis_ipv6_required: true`  
+`sles12cis_ipv6_required: true`  
 
 
 ##### AIDE
-`rhel7cis_config_aide: true`
+`sles12cis_config_aide: true`
 
 ###### AIDE cron settings
 ```
-rhel7cis_aide_cron:
+sles12cis_aide_cron:
   cron_user: root
   cron_file: /etc/crontab
   aide_job: '/usr/sbin/aide --check'
@@ -121,28 +113,28 @@ rhel7cis_aide_cron:
 ```
 
 ##### SELinux policy
-`rhel7cis_selinux_pol: targeted` 
+`sles12cis_selinux_pol: targeted` 
 
 
 ##### Set to 'true' if X Windows is needed in your environment
-`rhel7cis_xwindows_required: no` 
+`sles12cis_xwindows_required: no` 
 
 
 ##### Client application requirements
 ```
-rhel7cis_openldap_clients_required: false 
-rhel7cis_telnet_required: false 
-rhel7cis_talk_required: false  
-rhel7cis_rsh_required: false 
-rhel7cis_ypbind_required: false 
+sles12cis_openldap_clients_required: false 
+sles12cis_telnet_required: false 
+sles12cis_talk_required: false  
+sles12cis_rsh_required: false 
+sles12cis_ypbind_required: false 
 ```
 
 ##### Time Synchronization
 ```
-rhel7cis_time_synchronization: chrony
-rhel7cis_time_Synchronization: ntp
+sles12cis_time_synchronization: chrony
+sles12cis_time_Synchronization: ntp
 
-rhel7cis_time_synchronization_servers:
+sles12cis_time_synchronization_servers:
     - 0.pool.ntp.org
     - 1.pool.ntp.org
     - 2.pool.ntp.org
@@ -151,27 +143,27 @@ rhel7cis_time_synchronization_servers:
   
 ##### 3.4.2 | PATCH | Ensure /etc/hosts.allow is configured
 ```
-rhel7cis_host_allow:
+sles12cis_host_allow:
   - "10.0.0.0/255.0.0.0"  
   - "172.16.0.0/255.240.0.0"  
   - "192.168.0.0/255.255.0.0"    
 ```  
 
 ```
-rhel7cis_firewall: firewalld
-rhel7cis_firewall: iptables
+sles12cis_firewall: firewalld
+sles12cis_firewall: iptables
 ``` 
   
 
 Dependencies
 ------------
 
-Ansible > 2.2
+Ansible > 2.5
 
 Example Playbook
 -------------------------
 
-This sample playbook should be run in a folder that is above the main RHEL7-CIS / RHEL7-CIS-devel folder.
+This sample playbook should be run in a folder that is above the main SLES12-CIS / SLES12-CIS-devel folder.
 
 ```
 - name: Harden Server
@@ -179,7 +171,7 @@ This sample playbook should be run in a folder that is above the main RHEL7-CIS 
   become: yes
 
   roles:
-    - RHEL7-CIS
+    - SLES12-CIS
 ```
 
 Tags

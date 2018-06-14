@@ -1,5 +1,5 @@
 [all]
-centos7 ansible_connection=docker
+openSUSE-42.3 ansible_connection=docker
 
 [role_test]
-RHEL7-CIS
+SLES12-CIS

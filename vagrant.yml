@@ -15,8 +15,8 @@ vagrant:
     - "vm.synced_folder './', '/vagrant', disabled: true"
     - "ssh.insert_key = false"
   platforms:
-    - name: centos/7
-      box: centos/7
+    - name: openSUSE-42.3
+      box: opensuse/openSUSE-42.3-x86_64
   providers:
     - name: virtualbox
       type: virtualbox
@@ -24,7 +24,7 @@ vagrant:
         memory: 512
         cpus: 2
   instances:
-    - name: vagrant
+    - name: opensuse42
       ansible_groups:
         - vagrant
 verifier:

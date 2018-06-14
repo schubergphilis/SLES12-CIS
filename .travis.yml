@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-  - docker pull centos/systemd
+  - docker pull opensuse/leap:42.3
 
 script:
   - make test

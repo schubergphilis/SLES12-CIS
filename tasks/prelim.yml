@@ -11,6 +11,7 @@
   shell: "cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
   register: empty_password_accounts
   changed_when: no
+  failed_when: empty_password_accounts.rc > 1
   check_mode: no
 
 - name: "PRELIM | Gather UID 0 accounts other than root"
@@ -31,7 +32,7 @@
 
 - name: "PRELIM | Check if prelink package is installed"
   command: rpm -q prelink
-  warn: no
+  warn: false
   register: prelink_installed
   changed_when: no
   failed_when: no
@@ -41,7 +42,7 @@
 
 - name: "PRELIM | Check if postfix package is installed"
   command: rpm -q postfix
-  warn: no
+  warn: false
   register: postfix_installed
   changed_when: no
   failed_when: no
@@ -55,14 +56,18 @@
   register: xinetd_service_status
   changed_when: no
   check_mode: no
-  warn: no
+  warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for ntpd service"
   shell: "{{ 'service ntpd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show ntpd | grep LoadState | cut -d = -f 2' }}"
   register: ntpd_service_status
   changed_when: no
   check_mode: no
-  warn: no
+  warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for chronyd service"
   shell: "{{ 'service chronyd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show chronyd | grep LoadState | cut -d = -f 2' }}"
@@ -70,6 +75,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for avahi-daemon service"
   shell: "{{ 'service avahi-daemon status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show avahi-daemon | grep LoadState | cut -d = -f 2' }}"
@@ -77,6 +84,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for cups service"
   shell: "{{ 'service cups status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show cups | grep LoadState | cut -d = -f 2' }}"
@@ -84,6 +93,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for dhcpd service"
   shell: "{{ 'service dhcpd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show dhcpd | grep LoadState | cut -d = -f 2' }}"
@@ -91,6 +102,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for slapd service"
   shell: "{{ 'service slapd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show slapd | grep LoadState | cut -d = -f 2' }}"
@@ -98,6 +111,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for nfs service"
   shell: "{{ 'service nfs status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show nfs | grep LoadState | cut -d = -f 2' }}"
@@ -105,6 +120,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for rpcbind service"
   shell: "{{ 'service rpcbind status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rpcbind | grep LoadState | cut -d = -f 2' }}"
@@ -112,6 +129,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for named service"
   shell: "{{ 'service snmpd named | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show named | grep LoadState | cut -d = -f 2' }}"
@@ -119,6 +138,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for vsftpd service"
   shell: "{{ 'service vsftpd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show vsftpd | grep LoadState | cut -d = -f 2' }}"
@@ -126,6 +147,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for httpd service"
   shell: "{{ 'service httpd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show httpd | grep LoadState | cut -d = -f 2' }}"
@@ -133,6 +156,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for dovecot service"
   shell: "{{ 'service dovecot status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show dovecot | grep LoadState | cut -d = -f 2' }}"
@@ -140,6 +165,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for smb service"
   shell: "{{ 'service smb status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show smb | grep LoadState | cut -d = -f 2' }}"
@@ -147,6 +174,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for squid service"
   shell: "{{ 'service squid status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show squid | grep LoadState | cut -d = -f 2' }}"
@@ -154,6 +183,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for snmpd service"
   shell: "{{ 'service snmpd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show snmpd | grep LoadState | cut -d = -f 2' }}"
@@ -161,6 +192,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for ypserv service"
   shell: "{{ 'service ypserv status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show ypserv | grep LoadState | cut -d = -f 2' }}"
@@ -168,6 +201,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for rsh.socket service"
   shell: "{{ 'service rsh.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rsh.socket | grep LoadState | cut -d = -f 2' }}"
@@ -175,6 +210,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for rlogin.socket service"
   shell: "{{ 'service rlogin.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rlogin.socket | grep LoadState | cut -d = -f 2' }}"
@@ -182,6 +219,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for rexec.socket service"
   shell: "{{ 'service rexec.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rexec.socket | grep LoadState | cut -d = -f 2' }}"
@@ -189,6 +228,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for telnet service"
   shell: "{{ 'service telnet status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show telnet | grep LoadState | cut -d = -f 2' }}"
@@ -196,6 +237,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for tftp service"
   shell: "{{ 'service tftp status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show tftp | grep LoadState | cut -d = -f 2' }}"
@@ -203,6 +246,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for rsyncd service"
   shell: "{{ 'service rsyncd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rsyncd | grep LoadState | cut -d = -f 2' }}"
@@ -210,6 +255,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for ntalk service"
   shell: "{{ 'service ntalk status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show ntalk | grep LoadState | cut -d = -f 2' }}"
@@ -217,6 +264,8 @@
   changed_when: no
   check_mode: no
   warn: false
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Check for autofs service"
   shell: "{{ 'service autofs status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show autofs | grep LoadState | cut -d = -f 2' }}"
@@ -224,17 +273,5 @@
   changed_when: no
   check_mode: no
   warn: false
-
-- name: "PRELIM | Check for rhnsd service"
-  shell: "{{ 'service rhnsd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rhnsd | grep LoadState | cut -d = -f 2' }}"
-  register: rhnsd_service_status
-  changed_when: no
-  check_mode: no
-  failed_when: rhnsd_service_status.rc not in rhel7cis_service_status_ok_exit_codes
-  warn: false
-
-- debug:
-      msg: "Firewall found:{{ rhel7cis_firewall }}; Time sync service found:{{ rhel7cis_time_synchronization }}; Systemd section found : {{ rhel7cis_systemd }}"
-
-- debug:
-      msg: "NTP status: {{ ntpd_service_status.stdout }}"
+  tags:
+      - skip_ansible_lint
