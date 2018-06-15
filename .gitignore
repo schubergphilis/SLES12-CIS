@@ -2,6 +2,7 @@
 *.retry
 .DS_Store
 .vscode-root
+.vagrant
 test.yml
 tests/local-test.yml
 tests/.vagrant

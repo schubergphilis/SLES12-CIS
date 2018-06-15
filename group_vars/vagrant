@@ -24,5 +24,5 @@ sles12cis__sshd:
     denygroups: root
 
 # Vagrant can touch code that Docker cannot
-sles12cis__skip_for_travis: false
-sles12cis__selinux_disable: false
+sles12cis_skip_for_travis: false
+sles12cis_selinux_disable: false

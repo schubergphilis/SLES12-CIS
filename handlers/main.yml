@@ -51,6 +51,6 @@
   args:
     warn: false
   when:
-    - sles12cis__skip_for_travis == false
+    - sles12cis_skip_for_travis == false
   tags:
     - skip_ansible_lint
