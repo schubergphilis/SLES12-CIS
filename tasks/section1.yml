@@ -224,6 +224,7 @@
 
 - name: "SCORED | 1.1.2 | PATCH | Ensure separate partition exists for /tmp | enable and start/restart tmp.mount"
   command: /bin/true
+  changed_when: no
   when:
       - sles12cis_rule_1_1_2
   tags:
@@ -239,6 +240,7 @@
          SCORED | 1.1.5 | PATCH | Ensure noexec option set on /tmp partition\n
          | drop custom tmp.mount"
   command: /bin/true
+  changed_when: no
   when:
       - sles12cis_rule_1_1_3
       - sles12cis_rule_1_1_4
