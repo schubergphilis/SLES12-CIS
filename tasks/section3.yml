@@ -371,7 +371,10 @@
   package:
       name: firewalld
       state: present
-  when: sles12cis_firewall == "firewalld"
+  when:
+      - sles12cis_firewall == "firewalld"
+      - sles12cis_rule_3_6 
+
   tags:
       - level1
       - patch
