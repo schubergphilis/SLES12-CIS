@@ -427,7 +427,9 @@
       - rule_1.1.20
 
 - name: "SCORED | 1.1.21 | PATCH | Ensure sticky bit is set on all world-writable directories"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+  shell: set -o pipefail && df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+  args:
+      executable: /bin/bash
   changed_when: no
   failed_when: no
   #when: sticky_bit_on_worldwritable_dirs_audit.rc == '0'
@@ -444,7 +446,7 @@
       name: autofs
       enabled: no
   when:
-      - sles12cis_allow_autofs == false and autofs_service_status.stdout in sles12cis_service_status
+      - not sles12cis_allow_autofs and autofs_service_status.stdout in sles12cis_service_status
       - sles12cis_rule_1_1_22
   tags:
       - level1
@@ -563,7 +565,7 @@
 
 - name: "SCORED | 1.4.1 | PATCH | Ensure permissions on bootloader config are configured"
   file:
-      path: "{{ grub_cfg.stat.lnk_source if grub_cfg.stat.islnk else grub_cfg.stat.path}}"
+      path: "{{ grub_cfg.stat.lnk_source if grub_cfg.stat.islnk else grub_cfg.stat.path }}"
       owner: root
       group: root
       mode: 0600
@@ -597,7 +599,7 @@
       content: "GRUB2_PASSWORD={{ grub_pass.passhash }}"
   notify: generate new grub config
   when:
-      - sles12cis_set_boot_pass and grub_pass is defined and grub_pass.passhash is defined and grub_pass.passhash != ''
+      - sles12cis_set_boot_pass and grub_pass is defined and grub_pass.passhash is defined and grub_pass.passhash
       - sles12cis_rule_1_4_2
   tags:
       - level1
@@ -640,7 +642,9 @@
       - rule_1.5.1
 
 - name: "NOTSCORED | 1.5.2 | PATCH | Ensure XD/NX support is enabled"
-  shell: dmesg|grep -E "NX|XD" | grep " active"
+  shell: set -o pipefail && dmesg|grep -E "NX|XD" | grep " active"
+  args:
+      executable: /bin/bash
   changed_when: no
   failed_when: no
   when:

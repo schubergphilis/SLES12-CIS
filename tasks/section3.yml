@@ -8,7 +8,7 @@
   notify:
       - sysctl flush ipv4 route table
   when:
-      - sles12cis_is_router == false
+      - not sles12cis_is_router
       - sles12cis_rule_3_1_1
   tags:
       - level1
@@ -30,7 +30,7 @@
   notify:
       - sysctl flush ipv4 route table
   when:
-      - sles12cis_is_router == false
+      - not sles12cis_is_router
       - sles12cis_rule_3_1_2
   tags:
       - level1
@@ -208,7 +208,7 @@
   notify:
       - sysctl flush ipv6 route table
   when:
-      - sles12cis_ipv6_required == true
+      - not sles12cis_ipv6_required
       - sles12cis_rule_3_3_1
   tags:
       - level1
@@ -230,7 +230,7 @@
   notify:
       - sysctl flush ipv6 route table
   when:
-      - sles12cis_ipv6_required == true
+      - sles12cis_ipv6_required
       - sles12cis_rule_3_3_2
   tags:
       - level1
@@ -245,7 +245,7 @@
       line: "options ipv6 disable=1"
       create: yes
   when:
-      - sles12cis_ipv6_required == false
+      - not sles12cis_ipv6_required
       - sles12cis_rule_3_3_3
   tags:
       - level1
@@ -373,7 +373,7 @@
       state: present
   when:
       - sles12cis_firewall == "firewalld"
-      - sles12cis_rule_3_6 
+      - sles12cis_rule_3_6
 
   tags:
       - level1

@@ -8,14 +8,18 @@
   check_mode: no
 
 - name: "PRELIM | Gather accounts with empty password fields"
-  shell: "cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
+  shell: "set -o pipefail && cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'"
+  args:
+      executable: /bin/bash
   register: empty_password_accounts
   changed_when: no
   failed_when: empty_password_accounts.rc > 1
   check_mode: no
 
 - name: "PRELIM | Gather UID 0 accounts other than root"
-  shell: "cat /etc/passwd | awk -F: '($3 == 0 && $1 != \"root\") {i++;print $1 } END {exit i}'"
+  shell: "set -o pipefail && cat /etc/passwd | awk -F: '($3 == 0 && $1 != \"root\") {i++;print $1 } END {exit i}'"
+  args:
+      executable: /bin/bash
   register: uid_zero_accounts_except_root
   changed_when: no
   check_mode: no
@@ -70,7 +74,7 @@
       - skip_ansible_lint
 
 - name: "PRELIM | Check for chronyd service"
-  shell: "{{ 'service chronyd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show chronyd | grep LoadState | cut -d = -f 2' }}"
+  shell: "{{ 'service chronyd status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show chronyd | grep LoadState | cut -d = -f 2' }}"  # noqa: 204
   register: chronyd_service_status
   changed_when: no
   check_mode: no
@@ -79,7 +83,7 @@
       - skip_ansible_lint
 
 - name: "PRELIM | Check for avahi-daemon service"
-  shell: "{{ 'service avahi-daemon status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show avahi-daemon | grep LoadState | cut -d = -f 2' }}"
+  shell: "{{ 'service avahi-daemon status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show avahi-daemon | grep LoadState | cut -d = -f 2' }}"  # noqa: 204
   register: avahi_service_status
   changed_when: no
   check_mode: no
@@ -205,7 +209,7 @@
       - skip_ansible_lint
 
 - name: "PRELIM | Check for rsh.socket service"
-  shell: "{{ 'service rsh.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rsh.socket | grep LoadState | cut -d = -f 2' }}"
+  shell: "{{ 'service rsh.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rsh.socket | grep LoadState | cut -d = -f 2' }}"  # noqa: 204
   register: rsh_service_status
   changed_when: no
   check_mode: no
@@ -214,7 +218,7 @@
       - skip_ansible_lint
 
 - name: "PRELIM | Check for rlogin.socket service"
-  shell: "{{ 'service rlogin.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rlogin.socket | grep LoadState | cut -d = -f 2' }}"
+  shell: "{{ 'service rlogin.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rlogin.socket | grep LoadState | cut -d = -f 2' }}"  # noqa: 204
   register: rlogin_service_status
   changed_when: no
   check_mode: no
@@ -223,7 +227,7 @@
       - skip_ansible_lint
 
 - name: "PRELIM | Check for rexec.socket service"
-  shell: "{{ 'service rexec.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rexec.socket | grep LoadState | cut -d = -f 2' }}"
+  shell: "{{ 'service rexec.socket status | cut -d \" \" -f 6' if ansible_service_mgr == 'upstart' else 'systemctl show rexec.socket | grep LoadState | cut -d = -f 2' }}"  # noqa: 204
   register: rexec_service_status
   changed_when: no
   check_mode: no

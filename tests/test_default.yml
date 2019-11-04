@@ -9,83 +9,82 @@
     install_dir: '/root'
 
   tasks:
-  - name: Add unzip for Ansible unarchive module
-    package:
-      name: unzip
-      state: present
+    - name: Add unzip for Ansible unarchive module
+      package:
+        name: unzip
+        state: present
 
-  - name: Ignore the rest when you are not a CIS Member
-    unarchive:
-      src: "{{ member_dir }}/{{ ciscat }}"
-      dest: "{{ install_dir }}"
-      creates: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
-    ignore_errors: yes
+    - name: Ignore the rest when you are not a CIS Member
+      unarchive:
+        src: "{{ member_dir }}/{{ ciscat }}"
+        dest: "{{ install_dir }}"
+        creates: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
+      ignore_errors: yes
 
-  - name: Checking if CISCAT was installed
-    stat:
-      path: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
-    changed_when: no
-    failed_when: no
-    check_mode: no
-    register: sles12cis_cat
+    - name: Checking if CISCAT was installed
+      stat:
+        path: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
+      changed_when: no
+      failed_when: no
+      check_mode: no
+      register: sles12cis_cat
 
-  - name: Ensure /root/CIS-CAT_Results/ exists
-    when: sles12cis_cat.stat.exists
-    file:
-      path: /root/CIS-CAT_Results/
-      state: directory
-      mode: 0700
+    - name: Ensure /root/CIS-CAT_Results/ exists
+      when: sles12cis_cat.stat.exists
+      file:
+        path: /root/CIS-CAT_Results/
+        state: directory
+        mode: 0700
 
-  - name: Ensure previous reports are absent
-    file:
-      path: "/tmp/inventory_hostname"
-      state: absent
+    - name: Ensure previous reports are absent
+      file:
+        path: "/tmp/inventory_hostname"
+        state: absent
 
-  - name: Add Java to run security audit
-    when: sles12cis_cat.stat.exists
-    package:
-      name: "{{ item }}"
-      state: present
-    with_items:
-     - java-1.8.0-openjdk-headless.x86_64
+    - name: Add Java to run security audit
+      when: sles12cis_cat.stat.exists
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - java-1.8.0-openjdk-headless.x86_64
 
+    - name: chmod script
+      when: sles12cis_cat.stat.exists
+      file:
+        path: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
+        mode: 0700
+        owner: root
+        group: root
 
-  - name: chmod script
-    when: sles12cis_cat.stat.exists
-    file:
-      path: "{{ install_dir  }}/cis-cat-full/CIS-CAT.sh"
-      mode: 0700
-      owner: root
-      group: root
+    - name: Run CIS_CAT
+      when: sles12cis_cat.stat.exists
+      shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ sles12cis_audit_level }}_-_Server'
+      args:
+        chdir: "{{ install_dir }}/cis-cat-full"
 
-  - name: Run CIS_CAT
-    when: sles12cis_cat.stat.exists
-    shell: './CIS-CAT.sh -a -t -rn report -b "`pwd`/benchmarks/CIS_CentOS_Linux_7_Benchmark_v2.1.1-xccdf.xml" -p xccdf_org.cisecurity.benchmarks_profile_Level_{{ sles12cis_audit_level }}_-_Server'
-    args:
-      chdir: "{{ install_dir }}/cis-cat-full"
+    - name: Move the html report
+      when: sles12cis_cat.stat.exists
+      shell: "mv -f /root/CIS-CAT_Results/*/report.html /tmp/{{ inventory_hostname }}.html"
 
-  - name: Move the html report
-    when: sles12cis_cat.stat.exists
-    shell: "mv -f /root/CIS-CAT_Results/*/report.html /tmp/{{ inventory_hostname }}.html"
+    - name: Move the text report
+      when: sles12cis_cat.stat.exists
+      shell: "mv -f /root/CIS-CAT_Results/*/report.txt /tmp/{{ inventory_hostname }}.txt"
 
-  - name: Move the text report
-    when: sles12cis_cat.stat.exists
-    shell: "mv -f /root/CIS-CAT_Results/*/report.txt /tmp/{{ inventory_hostname }}.txt"
+    - name: Clear the text reports
+      when: sles12cis_cat.stat.exists
+      shell: "rm -rf /root/CIS-CAT_Results/*"
 
-  - name: Clear the text reports
-    when: sles12cis_cat.stat.exists
-    shell: "rm -rf /root/CIS-CAT_Results/*"
+    - name: Fetch the text report
+      when: sles12cis_cat.stat.exists
+      fetch:
+        flat: True
+        src: "/tmp/{{ inventory_hostname }}.txt"
+        dest: "./{{ inventory_hostname }}.txt"
 
-  - name: Fetch the text report
-    when: sles12cis_cat.stat.exists
-    fetch:
-      flat: True
-      src: "/tmp/{{ inventory_hostname }}.txt"
-      dest: "./{{ inventory_hostname }}.txt"
-
-  - name: Fetch the html report
-    when: sles12cis_cat.stat.exists
-    fetch:
-      flat: True
-      src: "/tmp/{{ inventory_hostname }}.html"
-      dest: "./{{ inventory_hostname }}.html"
+    - name: Fetch the html report
+      when: sles12cis_cat.stat.exists
+      fetch:
+        flat: True
+        src: "/tmp/{{ inventory_hostname }}.html"
+        dest: "./{{ inventory_hostname }}.html"

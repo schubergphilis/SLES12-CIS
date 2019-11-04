@@ -19,7 +19,7 @@
 
 - name: generate new grub config
   become: yes
-  command: grub2-mkconfig -o "{{ grub_cfg.stat.lnk_source if grub_cfg.stat.islnk else grub_cfg.stat.path}}"
+  command: grub2-mkconfig -o "{{ grub_cfg.stat.lnk_source if grub_cfg.stat.islnk else grub_cfg.stat.path }}"
 
 - name: restart firewalld
   become: yes
@@ -49,8 +49,8 @@
   check_mode: no
   failed_when: no
   args:
-    warn: false
+      warn: false
   when:
-    - sles12cis_skip_for_travis == false
+      - not sles12cis_skip_for_travis
   tags:
-    - skip_ansible_lint
+      - skip_ansible_lint

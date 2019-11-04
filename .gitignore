@@ -19,4 +19,5 @@ include/
 lib/
 pip-selfcheck.json
 share/
+meta/.galaxy_install_info
 

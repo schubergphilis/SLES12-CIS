@@ -1,5 +1,5 @@
 ---
-sles12cis_service_status: ['loaded','running...']
+sles12cis_service_status: ['loaded', 'running...']
 
 # defaults file for SLES12-CIS
 sles12cis_skip_for_travis: false
@@ -337,64 +337,64 @@ sles12cis_time_synchronization: ntp
 #sles12cis_time_synchronization: chrony
 
 sles12cis_time_synchronization_servers:
-    - 0.pool.ntp.org
-    - 1.pool.ntp.org
-    - 2.pool.ntp.org
-    - 3.pool.ntp.org
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+  - 2.pool.ntp.org
+  - 3.pool.ntp.org
 # 3.4.1 Ensure TCP Wrappers is installed (Scored)
 sles12cis_tcpwrapper: tcpd
 
 # 3.4.2 | PATCH | Ensure /etc/hosts.allow is configured
 sles12cis_host_allow:
-    - "10.0.0.0/255.0.0.0"
-    - "172.16.0.0/255.240.0.0"
-    - "192.168.0.0/255.255.0.0"
+  - "10.0.0.0/255.0.0.0"
+  - "172.16.0.0/255.240.0.0"
+  - "192.168.0.0/255.255.0.0"
 
 sles12cis_firewall: iptables
 # sles12cis_firewall: firewalld
 
 sles12cis_firewall_services:
-    - ssh
-    - dhcpv6-client
+  - ssh
+  - dhcpv6-client
 
 # Warning Banner Content (issue, issue.net, motd)
 sles12cis_warning_banner: |
-    Authorized uses only. All activity may be monitored and reported.
+  Authorized uses only. All activity may be monitored and reported.
 # End Banner
 
 ## Section4 vars
 
 sles12cis_auditd:
-    admin_space_left_action: halt
-    max_log_file_action: keep_logs
+  admin_space_left_action: halt
+  max_log_file_action: keep_logs
 
 sles12cis_logrotate: "daily"
 
 ## Section5 vars
 
 sles12cis_sshd:
-    clientalivecountmax: 3
-    clientaliveinterval: 300
-    ciphers: "aes256-ctr,aes192-ctr,aes128-ctr"
-    macs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com"
-    logingracetime: 60
-    # - make sure you understand the precedence when working with these values!!
-    #allowusers:
-    #allowgroups: systems dba
-    #denyusers:
-    #denygroups:
+  clientalivecountmax: 3
+  clientaliveinterval: 300
+  ciphers: "aes256-ctr,aes192-ctr,aes128-ctr"
+  macs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com"
+  logingracetime: 60
+  # - make sure you understand the precedence when working with these values!!
+  #allowusers:
+  #allowgroups: systems dba
+  #denyusers:
+  #denygroups:
 
 sles12cis_pass:
-    max_days: 90
-    min_days: 7
-    warn_age: 7
+  max_days: 90
+  min_days: 7
+  warn_age: 7
 
 # Syslog system
 sles12cis_syslog: rsyslog
 #sles12cis_syslog: syslog-ng
 
 sles12cis_vartmp:
-    source: /tmp
-    fstype: none
-    opts: "defaults, nodev, nosuid, noexec, bind"
-    enabled: no
+  source: /tmp
+  fstype: none
+  opts: "defaults, nodev, nosuid, noexec, bind"
+  enabled: no

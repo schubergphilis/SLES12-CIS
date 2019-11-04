@@ -2,9 +2,10 @@
 # tasks file for SLES12-CIS
 - name: Check OS family
   fail:
-      msg: "This role can only be run against SLES 12. {{ ansible_os_family }}/{{ ansible_distribution }}/{{ ansible_distribution_major_version }} is not supported."
+      msg: "This role can only be run against SLES 12. {{ ansible_os_family }}/{{ ansible_distribution }}/{{ ansible_distribution_major_version }}\
+          \ is not supported."
   when:
-      - not (ansible_os_family == 'Suse' and ansible_distribution_major_version in ['12','42'])
+      - not (ansible_os_family == 'Suse' and ansible_distribution_major_version in ['12', '42'])
   tags:
       - always
 

@@ -6,9 +6,9 @@ galaxy_info:
   min_ansible_version: 2.2
 
   platforms:
-  - name: SLES
-    versions:
-      - 12
+    - name: SLES
+      versions:
+        - 12
 
   galaxy_tags:
     - system

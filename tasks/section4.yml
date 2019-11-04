@@ -64,7 +64,7 @@
       state: started
       enabled: yes
   when:
-      - sles12cis_skip_for_travis == false
+      - not sles12cis_skip_for_travis
       - sles12cis_rule_4_1_2
   tags:
       - level2
@@ -217,7 +217,9 @@
       - rule_4.1.11
 
 - name: "SCORED | 4.1.12 | PATCH | Ensure use of privileged commands is collected"
-  shell: for i in  $(df | grep '^/dev' | awk '{ print $NF }'); do find $i -xdev -type f -perm -4000 -o -type f -perm -2000 2>/dev/null; done
+  shell: set -o pipefail && for i in  $(df | grep '^/dev' | awk '{ print $NF }'); do find $i -xdev -type f -perm -4000 -o -type f -perm -2000 2>/dev/null; done
+  args:
+      executable: /bin/bash
   register: priv_procs
   changed_when: no
   check_mode: no
@@ -488,7 +490,7 @@
 
 - name: "NOTSCORED | 4.3 | PATCH | Ensure logrotate is configured"
   find:
-    paths: /etc/logrotate.d/
+      paths: /etc/logrotate.d/
   register: log_rotates
   tags:
       - level1
@@ -498,12 +500,12 @@
 
 - name: "NOTSCORED | 4.3 | PATCH | Ensure logrotate is configured"
   replace:
-    path: "{{ item.path }}"
-    regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
-    replace: "\\1{{ sles12cis_logrotate }}"
+      path: "{{ item.path }}"
+      regexp: '^(\s*)(daily|weekly|monthly|yearly)$'
+      replace: "\\1{{ sles12cis_logrotate }}"
   with_items:
-    - "{{ log_rotates.files }}"
-    - { path: "/etc/logrotate.conf" }
+      - "{{ log_rotates.files }}"
+      - { path: "/etc/logrotate.conf" }
   no_log: true
   tags:
       - level1
