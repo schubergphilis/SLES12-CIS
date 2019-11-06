@@ -1,0 +1,11 @@
+{
+    "executables": [
+        "pipenv",
+        "curl",
+        "shasum"
+    ],
+    "environment_variables": [
+    ],
+    "upload_environment_variables": [ "ANSIBLE_UPLOAD_TOKEN"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "PIPENV_VENV_IN_PROJECT": "true",
+    "PIPENV_DEFAULT_PYTHON_VERSION": "3.7",
+    "PIPENV_PIPFILE": "_CI/files/Pipfile",
+    "PROJECT_SLUG": "SLES12-CIS",
+    "ROLE_REPOSITORY": "https://enexis.jfrog.io/enexis/ansible/roles",
+    "ANSIBLE_UPLOAD_USER": "ansible-upload"
+}

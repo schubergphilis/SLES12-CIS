@@ -1,0 +1,21 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+semver = "~=2.8.1"
+gitwrapperlib = "~=0.9.1"
+coloredlogs = "~=10.0"
+emoji = "~=0.5.3"
+requests =  "~=2.22.0"
+
+[packages]
+
+ansible = "~=2.6.4"
+ansible-lint = "~=4.1.0"
+yamllint = "~=1.18.0"
+python-vagrant = "~=0.5.15"
+hvac = "~=0.9.5"

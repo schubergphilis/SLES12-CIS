@@ -1,23 +1,63 @@
-*.swp
-*.retry
-.DS_Store
-.vscode-root
-.vagrant
-test.yml
-tests/local-test.yml
-tests/.vagrant
-tests/Vagrantfile
-tests/test-inv
-tests/*.html
-tests/*.txt
-tests/*.retry
-.Python
-.molecule/
-bin/
-/etc/
-include/
-lib/
-pip-selfcheck.json
-share/
-meta/.galaxy_install_info
+# Packages
+*.egg
+*.egg-info
+/dist/
+/build/
+/eggs/
+/parts/
+/var/
+/sdist/
+/develop-eggs/
+.installed.cfg
+/lib/
+/lib64/
+/_build
 
+*.py[cod]
+
+# C extensions
+*.so
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+htmlcov
+test-output
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+.editorconfig
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+
+# pyCharm
+.idea
+
+# VirtualEnv
+env
+.venv
+
+# Mac
+.DS_Store
+
+#Visual Studio Code
+.vscode
+
+# python env file
+.env
+
+meta/.galaxy_install_info
