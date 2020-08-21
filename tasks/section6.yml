@@ -171,7 +171,8 @@
   command: sed -i '/^+/ d' /etc/passwd
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_6_2_2
   tags:
@@ -184,7 +185,8 @@
   command: sed -i '/^+/ d' /etc/shadow
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_6_2_3
   tags:
