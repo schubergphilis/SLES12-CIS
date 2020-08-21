@@ -260,7 +260,8 @@
   register: var_mounted
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_1_1_6
   tags:
@@ -311,7 +312,8 @@
   register: var_log_mounted
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_1_1_11
   tags:
@@ -326,7 +328,8 @@
   register: var_log_audit_mounted
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_1_1_12
   tags:
@@ -341,7 +344,8 @@
   register: home_mounted
   changed_when: no
   failed_when: no
-  warn: false
+  args:
+    warn: false
   when:
       - sles12cis_rule_1_1_13
   tags:
@@ -453,10 +457,11 @@
 
 - name: "NOTSCORED | 1.2.1 | PATCH | Ensure package manager repositories are configured"
   command: yum check-update
-  warn: false
   register: yum_configured
   changed_when: no
   failed_when: no
+  args:
+    warn: false
   when:
       - sles12cis_rule_1_2_1
   tags:
