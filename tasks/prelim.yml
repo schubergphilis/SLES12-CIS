@@ -43,11 +43,12 @@
 
 - name: "PRELIM | Check if postfix package is installed"
   command: rpm -q postfix
-  warn: false
   register: postfix_installed
   changed_when: no
   failed_when: no
   check_mode: no
+  args:
+    warn: false
   tags:
       - skip_ansible_lint
 
