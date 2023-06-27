@@ -202,6 +202,7 @@
       create: yes
   when:
       - sles12cis_rule_1_1_1_8
+      - not booted_with_efi
   tags:
       - level1
       - scored
@@ -215,6 +216,7 @@
       state: absent
   when:
       - sles12cis_rule_1_1_1_8
+      - not booted_with_efi
   tags:
       - level2
       - scored

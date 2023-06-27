@@ -248,3 +248,9 @@
   check_mode: no
   tags:
       - skip_ansible_lint
+
+- name: PRELIM | Check to see if we are booting with EFI or UEFI
+  set_fact:
+    booted_with_efi: "{{ ansible_facts['mounts'] | selectattr('mount', 'equalto', '/boot/efi') | list | length > 0 }}"
+  changed_when: no
+  check_mode: no
