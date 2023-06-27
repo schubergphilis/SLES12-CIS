@@ -36,8 +36,6 @@
   changed_when: no
   failed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -47,8 +45,6 @@
   changed_when: no
   failed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -58,8 +54,6 @@
   register: xinetd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -68,8 +62,6 @@
   register: ntpd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -78,8 +70,6 @@
   register: chronyd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -88,8 +78,6 @@
   register: avahi_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -98,8 +86,6 @@
   register: cups_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -108,8 +94,6 @@
   register: dhcpd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -118,8 +102,6 @@
   register: slapd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -128,8 +110,6 @@
   register: nfs_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -138,8 +118,6 @@
   register: rpcbind_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -148,8 +126,6 @@
   register: named_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -158,8 +134,6 @@
   register: vsftpd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -168,8 +142,6 @@
   register: httpd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -178,8 +150,6 @@
   register: dovecot_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -188,8 +158,6 @@
   register: smb_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -198,8 +166,6 @@
   register: squid_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -208,8 +174,6 @@
   register: snmpd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -218,8 +182,6 @@
   register: ypserv_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -228,8 +190,6 @@
   register: rsh_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -238,8 +198,6 @@
   register: rlogin_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -248,8 +206,6 @@
   register: rexec_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -258,8 +214,6 @@
   register: telnet_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -268,8 +222,6 @@
   register: tftp_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -278,8 +230,6 @@
   register: rsyncd_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -288,8 +238,6 @@
   register: ntalk_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
 
@@ -298,7 +246,5 @@
   register: autofs_service_status
   changed_when: no
   check_mode: no
-  args:
-    warn: false
   tags:
       - skip_ansible_lint
