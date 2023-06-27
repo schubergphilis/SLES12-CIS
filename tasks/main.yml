@@ -17,38 +17,54 @@
 
 - include: prelim.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   tags:
       - prelim_tasks
       - always
 
 - include: section1.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section1
   tags:
       - sles12cis_section1
 
 - include: section2.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section2
 
 - include: section3.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section3
 
 - include: section4.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section4
 
 - include: section5.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section5
 
 - include: section6.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   when: sles12cis_section6
 
 - include: post.yml
   become: yes
+  environment:
+      ZYPP_LOCK_TIMEOUT: 180
   tags:
       - post_tasks
       - always
